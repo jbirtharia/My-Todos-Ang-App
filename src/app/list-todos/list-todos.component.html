@@ -1,0 +1,50 @@
+<br>
+<div class="font-monospace text-decoration-underline">
+  <h1> Todo's List </h1>
+</div>
+
+<br>
+<div class="alert alert-success" *ngIf="deleteMessage">
+  {{deleteMessage}}
+</div>
+
+<div class="container">
+  <table id="todos" class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th> Description </th>
+        <th> Is Completed? </th>
+        <th> Target Date </th>
+        <th> Update </th>
+        <th> Delete </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let todo of todos">
+        <td>{{todo.description}}</td>
+        <td>{{todo.isDone}}</td>
+        <td>{{todo.targetDate | date}}</td>
+        <td><button (click)="updateTodo(todo.id, todo.description)" class="btn btn-success">Update</button></td>
+        <td><button (click)="deleteTodo(todo.id, todo.description, mymodal)" class="btn btn-warning">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <td><button (click)="addTodo()" class="btn btn-success">Add Todo</button></td>
+  </div>
+</div>
+
+
+<!-- Below model popup during login failed  -->
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Operation Failed</h5>
+  </div>
+  <div class="modal-body">
+    <p style="text-align: center;"> This user is not allowed to delete todo </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">OK</button>
+  </div>
+</ng-template>

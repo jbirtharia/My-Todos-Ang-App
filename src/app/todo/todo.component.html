@@ -1,0 +1,59 @@
+<h1>Todo</h1>
+<br>
+<div class="container">
+
+  <!-- Validation Handling of Form -->
+  <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">
+    Enter valid values
+  </div>
+  <!-- <div class="alert alert-warning" *ngIf="todoForm.dirty && targetDate.invalid">
+    Enter valid Target Date
+  </div>
+  <div class="alert alert-warning" *ngIf="todoForm.dirty && description.invalid">
+    Enter atleast 5 characters in Description
+  </div> -->
+
+  <!-- Angular Form -->
+  <form (ngSubmit)="!(todoForm.invalid) && saveTodo(mymodal)" #todoForm="ngForm">
+    <fieldset class="form-group">
+      <label>Description</label>
+      <input type="text" class="form-control" name="description" required="required" [(ngModel)]="todo.description"
+        minlength="5" #description="ngModel">
+
+      <!-- Validation check for description field -->
+      <div class="fw-lighter" style="color: red;" *ngIf="todoForm.dirty && description.invalid">
+        Enter atleast 5 characters in Description
+      </div>
+
+    </fieldset>
+    <br>
+    <fieldset class="form-group">
+      <label>Target Date</label>
+      <input type="date" class="form-control" name="targetDate" required="required"
+        [ngModel]="todo.targetDate | date:'yyyy-MM-dd'" (ngModelChange)="todo.targetDate = $event"
+        #targetDate="ngModel">
+
+      <!-- Validation check for target date -->
+      <div class="fw-lighter" style="color: red;" *ngIf="todoForm.dirty && targetDate.invalid">
+        Enter valid Target Date
+      </div>
+
+    </fieldset>
+    <br>
+    <button type="submit" class="btn btn-success" [disabled]="todoForm.invalid">Save</button>
+  </form>
+
+</div>
+
+<!-- Below model popup during login failed  -->
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Operation Failed</h5>
+  </div>
+  <div class="modal-body">
+    <p style="text-align: center;"> This user is not allowed to add/update todo </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">OK</button>
+  </div>
+</ng-template>

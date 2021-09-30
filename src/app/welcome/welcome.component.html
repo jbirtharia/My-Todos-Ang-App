@@ -1,0 +1,32 @@
+<br>
+<div class="container">
+  <span>
+    <h2>{{welcomeMessage | titlecase}}</h2>
+  </span>
+  <br>
+  <p class="font-monospace">
+    You can manage your todos <a [routerLink]="['/todos']"> here </a>
+  </p>
+</div>
+
+<!-- <div class="container">
+  <span> Click here to get a customized welcome message </span>
+  <button (click)="getWelcomeMessageWithUsername(username)" class="btn btn-success"> Get Welcome Message </button>
+</div> -->
+
+<div class="container" *ngIf="welcomeMessage">
+  <!-- <span>Your customized message </span> -->
+  <!-- <span><b>{{welcomeMessage}}</b></span> -->
+</div>
+
+<!-- <ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Something Went Wrong</h5>
+  </div>
+  <div class="modal-body" *ngIf="errorMessage">
+    <p> {{errorMessage}} </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Try Again</button>
+  </div>
+</ng-template> -->

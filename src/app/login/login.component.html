@@ -1,0 +1,64 @@
+<main class="login-form">
+  <div class="cotainer">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">Login Page</div>
+          <div class="card-body">
+            <!-- <form (ngSubmit)="handleLogin(mymodal)"> -->
+            <!-- <form (ngSubmit)="handleBasicAuthLogin(mymodal)"> -->
+            <form (ngSubmit)="handleJWTAuthLogin(mymodal)">
+              <div class="form-group row">
+                <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" name="email-address" [(ngModel)]="username" required #uname
+                    required autofocus>
+                </div>
+              </div>
+
+              <br>
+              <div class="form-group row">
+                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                <div class="col-md-6">
+                  <input type="password" class="form-control" name="password" [(ngModel)]="password" required>
+                </div>
+              </div>
+
+              <br>
+              <div class="col-md-6 offset-md-5">
+                <button type="submit" class="btn btn-primary">
+                  Login
+                </button>
+              </div>
+              <div><a href="#" class="btn btn-link" [routerLink]="['/changePassword']">
+                  Forgot Your Password?
+                </a></div>
+              <div><a href="#" class="btn btn-link" [routerLink]="['/newUser']">
+                  New User?
+                </a></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Below model popup during login failed  -->
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Login Failed</h5>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngIf="isValidUser; else elseBlock">
+      <p> Login Sucessfull </p>
+    </ng-container>
+    <ng-template #elseBlock>
+      <p style="text-align: center;"> Please Enter Valid E-Mail Address Or Password </p>
+    </ng-template>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Try Again</button>
+  </div>
+</ng-template>

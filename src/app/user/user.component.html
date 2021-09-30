@@ -1,0 +1,56 @@
+<main class="login-form">
+  <div class="cotainer">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">New User</div>
+          <div class="card-body">
+            <form (ngSubmit)="!(userForm.invalid) && createNewUser()" #userForm="ngForm">
+              <div class="form-group row">
+                <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" name="emailAddress" [(ngModel)]="username" required #uname
+                    required autofocus (ngModelChange)="checkIfUsernameIsAlreadyPresent()" minlength="5"
+                    #emailAddress="ngModel">
+                </div>
+                <!-- Validation check for duplicate username -->
+                <div class="fw-lighter" style="color: red;" *ngIf="userErrorMessage.length">
+                  Username already exist
+                </div>
+                <!-- Validation check for username field -->
+                <div class="fw-lighter" style="color: red;" *ngIf="userForm.dirty && emailAddress.invalid">
+                  Please choose username of atleast 5 characters
+                </div>
+              </div>
+              <br>
+              <div class="form-group row">
+                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                <div class="col-md-6">
+                  <input type="password" class="form-control" name="passwordField" minlength="5" [(ngModel)]="password"
+                    required #passwordField="ngModel">
+                </div>
+                <!-- Validation check for target date -->
+                <div class="fw-lighter" style="color: red;" *ngIf="userForm.dirty && passwordField.invalid">
+                  Please choose password of atleast 5 characters
+                </div>
+              </div>
+              <br>
+              <div class="col-md-6 offset-md-5">
+                <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">
+                  Submit
+                </button>
+              </div>
+            </form>
+            <div class="alert alert-success" *ngIf="successMessage">
+              {{successMessage}}
+            </div>
+            <div class="alert alert-warning" *ngIf="errorMessage">
+              {{errorMessage}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
